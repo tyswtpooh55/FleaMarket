@@ -1,0 +1,136 @@
+.item__content {
+    width: 80%;
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item__img {
+    width: 450px;
+    height: 550px;
+    background-color: #d9d9d9;
+    margin: 50px;
+}
+
+.item__data {
+    margin: 50px;
+    width: 40%;
+}
+
+.data__name--txt {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.data__brand--txt {
+    font-size: 24px;
+    color: #000;
+    margin: 0;
+}
+
+.data__price--txt {
+    font-size: 36px;
+    color: #000;
+    margin: 20px 0;
+}
+
+.item__data--btn {
+    display: flex;
+    margin: 10px 0;
+}
+
+.item__data--btn-like,
+.item__data--btn-comment {
+    margin-right: 60px;
+}
+
+.like-btn,
+.comment-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.like-btn img,
+.comment-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+.like-count,
+.comment-count {
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}
+
+.item__data--purchase-btn {
+    margin: 10px auto;
+}
+
+.data__purchase--btn-btn {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #f55;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+}
+
+.item__data--detail {
+    margin: 30px 0;
+}
+
+.data__detail--ttl,
+.data__info--ttl {
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    margin: 20px 0;
+}
+
+.data__detail--detail {
+    font-size: 24px;
+    color: #000;
+}
+
+.item__data--info {
+    margin-top: 60px;
+}
+
+.data__info--table {
+    margin: 60px 0;
+}
+
+.info__label,
+.info__data {
+    padding-top: 30px;
+}
+
+.info__label {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    padding-right: 60px;
+}
+
+.info__data {
+    font-size: 20px;
+    color: #000;
+}
+
+.category {
+    display: inline-block;
+    width: 100px;
+    background-color: #d9d9d9;
+    border-radius: 15px;
+    text-align: center;
+    margin-right: 20px;
+}
