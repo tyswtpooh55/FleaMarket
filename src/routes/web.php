@@ -15,3 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ItemController::class, 'index']);
+
+//ログイン認証
+Route::middleware('auth')->group(function () {
+
+});
