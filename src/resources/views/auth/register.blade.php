@@ -31,7 +31,7 @@
                     <label for="password" class="auth__form--label">パスワード</label>
                     <input type="password" name="password" class="auth__form--input">
                     @error('password')
-                        <p class="error">{{ $error }}</p>
+                        <p class="error">{{ $message }}</p>
                     @enderror
                 </div>
                 <button class="auth__form--btn">登録する</button>

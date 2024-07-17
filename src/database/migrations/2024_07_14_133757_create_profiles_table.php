@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionsTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')
-                ->constrained('items')
+            $table->foreignId('user_id')
+                ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('address_id')
-                ->constrained('addresses')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->dateTime('date');
+            $table->string('img_url')
+                ->nullable();
+            $table->string('postcode', 7);
+            $table->string('address');
+            $table->string('building')
+                ->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('profiles');
     }
 }
