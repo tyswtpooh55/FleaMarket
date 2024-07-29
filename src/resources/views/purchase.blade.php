@@ -4,49 +4,23 @@
     <link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
 @endsection
 
-@section('header')
-<div class="header__inner">
-    <div class="header__ttl">
-        <a href="/" class="header__logo"><img src="{{ asset('images/logo.svg') }}" alt="COACHTECH"></a>
-    </div>
-    <div class="header__search">
-        <input type="text" placeholder="なにをお探しですか？" class="search-form__input">
-    </div>
-    <div class="header__nav">
-        <ul>
-            <li class="header__nav--li">
-                <form action="/logout" method="POST" class="header__nav--form">
-                    @csrf
-                    <button class="header__nav--btn">ログアウト</button>
-                </form>
-            </li>
-            <li class="header__nav--li">
-                <form action="/mypage" method="GET" class="heaer__nav--form">
-                    @csrf
-                    <button class="header__nav--btn">マイページ</button>
-                </form>
-            </li>
-            <li class="header__nav--li">
-                <form action="/sell" method="GET" class="header__nav--form">
-                    @csrf
-                    <button class="header__nav--sell-btn">出品</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</div>
-@endsection
 
 @section('content')
     <div class="purchase__content">
         <div class="purchase__order">
             <div class="purchase__item">
                 <div class="item__img">
-                    <img src="{{-- Storage::url($item->image_path) --}}" alt="{{-- $item->name --}}">
+                    @if ($item->itemImages->isNotEmpty())
+                    <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
+                    @else
+                    <div class="item__img--none">
+                        <span class="item__img--none-txt">No Image</span>
+                    </div>
+                    @endif
                 </div>
                 <div class="item__data">
-                    <p class="item__name">商品名{{-- $item->name --}}</p>
-                    <p class="item__price">¥47,000{{-- $item->price --}}</p>
+                    <p class="item__name">{{ $item->name }}</p>
+                    <p class="item__price">¥{{ number_format($item->price) }}</p>
                 </div>
             </div>
             <div class="purchase__option">
@@ -55,7 +29,7 @@
             </div>
             <div class="purchase__option">
                 <p class="option__ttl">配送先</p>
-                <a href="" class="option__link">変更する</a>
+                <a href="{{ route('purchase.address', $user->id) }}" class="option__link">変更する</a>
             </div>
         </div>
         <div class="purchase__payment">
@@ -63,7 +37,7 @@
                 <table class="payment__table">
                     <tr class="payment__row">
                         <th class="payment__label">商品代金</th>
-                        <td class="payment__data">¥47,000{{-- $item->price --}}</td>
+                        <td class="payment__data">¥{{ number_format($item->price) }}</td>
                     </tr>
                     <tr class="payment__row">
                         <th class="payment__label"></th>
@@ -71,7 +45,7 @@
                     </tr>
                     <tr class="payment__row">
                         <th class="payment__label">支払い金額</th>
-                        <td class="payment__data">¥47,000{{-- $item->price --}}</td>
+                        <td class="payment__data">¥{{ number_format($item->price) }}</td>
                     </tr>
                     <tr class="payment__row">
                         <th class="payment__label">支払い方法</th>

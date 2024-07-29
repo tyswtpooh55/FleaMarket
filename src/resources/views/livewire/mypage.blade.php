@@ -1,7 +1,7 @@
 <div>
     <div class="mypage__item-list__heading">
         <div class="heading__tab">
-            <button class="heading__tab--ttl {{ $activeTab == 'sold' ? 'active' : '' }}" wire:click.prevent="setTab('sold')">出品した商品</button>
+            <button class="heading__tab--ttl {{ $activeTab == 'exhibit' ? 'active' : '' }}" wire:click.prevent="setTab('exhibit')">出品した商品</button>
             <button class="heading__tab--ttl {{ $activeTab == 'bought' ? 'active' : '' }}"
                 wire:click.prevent="setTab('bought')">購入した商品</button>
         </div>
@@ -9,31 +9,42 @@
     </div>
     <div class="mypage__item">
         <ul class="item__ul">
-            @if (count($products) > 0)
+            @if (count($items) > 0)
 
-                @foreach ($products as $product)
+                @foreach ($items as $item)
                 <li class="item__li">
                     <div class="item__img">
-                        <a href="" class="item__link"><img src="{{ $product->image_path }}" alt="{{ $product->name }}" class="item__img--pic"></a>
+                        <a href="{{ route('item', ['item_id' => $item->id]) }}" class="item__link">
+                            @if ($item->itemImages->isNotEmpty())
+                            <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--pic">
+                            @else
+                            <div class="item__img--none"><span class="item__img--none-name">{{ $item->name }}</span></div>
+                            @endif
+                        </a>
                     </div>
                 </li>
                 @endforeach
 
-                @for ($i = count($products); $i < 10; $i++)
+                @for ($i = count($items); $i < 10; $i++)
                 <li class="item__li">
-                    <div class="item__img--none"></div>
+                    <div class="item__img--none"><span class="item__img--none-txt">No Item</span></div>
                 </li>
                 @endfor
 
             @else
 
-                @for ($i = count($products); $i < 10; $i++)
+                @for ($i = count($items); $i < 10; $i++)
                 <li class="item__li">
-                    <div class="item__img--none"></div>
+                    <div class="item__img--none"><span class="item__img--none-txt">No Item</span></div>
                 </li>
                 @endfor
 
             @endif
         </ul>
+    </div>
+    <div class="pagination">
+        @if ($activeTab == 'bought' && $boughtItems)
+        {{ $boughtItems->links() }}
+        @endif
     </div>
 </div>

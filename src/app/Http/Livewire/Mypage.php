@@ -3,35 +3,57 @@
 namespace App\Http\Livewire;
 
 use App\Models\Item;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Mypage extends Component
 {
-    public $activeTab = 'sold';
-    public $products;
+    use WithPagination;
+
+    public $activeTab = 'exhibit';
+    protected $items;
+    protected $boughtItems;
 
     public function mount()
     {
-        $this->loadProducts();
+        $this->loadItems();
     }
 
     public function setTab($tab)
     {
         $this->activeTab = $tab;
-        $this->loadProducts();
+        $this->loadItems();
     }
 
-    public function loadProducts()
+    public function loadItems()
     {
-        if ($this->activeTab == "sold") {
-            $this->products = Item::all();
+        $user = Auth::user();
+
+        if ($this->activeTab == "exhibit") {
+            //出品した商品
+            $this->items = Item::where('seller_id', $user->id)
+                ->with('itemImages')
+                ->paginate(10);
         } else {
-            $this->products = Item::all();
+            //購入した商品
+            $boughtItems = Transaction::where('buyer_id', $user->id)
+                ->with('item.itemImages')
+                ->paginate(10);
+
+            $this->items = $boughtItems->getCollection()->map(fn($boughtItem) => $boughtItem->item);
+
+            $this->$boughtItems = $boughtItems;
         }
+
     }
 
     public function render()
     {
-        return view('livewire.mypage');
+        return view('livewire.mypage', [
+            'items' => $this->items,
+            'boughtItems' => $this->boughtItems ?? null,
+        ]);
     }
 }

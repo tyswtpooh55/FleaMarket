@@ -8,8 +8,27 @@
 .item__img {
     width: 450px;
     height: 550px;
-    background-color: #d9d9d9;
     margin: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.item__img--img {
+    width: 100%;
+}
+
+.item__img--none {
+    width: 100%;
+    height: 100%;
+    background-color: #d9d9d9;
+    display: flex;
+    align-items: center;
+}
+
+.item__img--none-txt {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 auto;
 }
 
 .item__data {
@@ -38,7 +57,7 @@
 
 .item__data--btn {
     display: flex;
-    margin: 10px 0;
+    margin: 30px 0;
 }
 
 .item__data--btn-like,
@@ -53,8 +72,8 @@
     cursor: pointer;
 }
 
-.like-btn img,
-.comment-btn img {
+.like__img,
+.comment__img {
     width: 40px;
     height: 40px;
 }
@@ -69,7 +88,7 @@
 }
 
 .item__data--purchase-btn {
-    margin: 10px auto;
+    margin: 30px auto;
 }
 
 .data__purchase--btn-btn {

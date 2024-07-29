@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->text('description');
-            $table->string('img_url');
-            $table->foreignId('seller_id')
-                ->constrained('users')
+            $table->foreignId('item_id')
+                ->constrained('items')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('condition_id')
-                ->constrained('conditions')
+            $table->foreignId('buyer_id')
+                ->constrained('users')
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
         });
@@ -37,6 +34,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('sold_item');
     }
 }
