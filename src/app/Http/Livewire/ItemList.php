@@ -6,38 +6,49 @@ use App\Models\Item;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ItemList extends Component
 {
+    use WithPagination;
+
     public $activeTab = 'recommendation';
-    public $products;
+    protected $items;
+    protected $likedItems;
 
     public function mount()
     {
-        $this->loadProducts();
+        $this->loadItems();
     }
 
     public function setTab($tab)
     {
         $this->activeTab = $tab;
-        $this->loadProducts();
+        $this->loadItems();
     }
 
-    public function loadProducts()
+    public function loadItems()
     {
         $user = Auth::user();
 
         if ($this->activeTab == "recommendation") {
-            $this->products = Item::all();
+            $this->items = Item::paginate(10);
         } else {
-            $this->products = Like::where('user_id', $user->id)
-                ->with('item')
-                ->get();
+            $likedItems = Like::where('user_id', $user->id)
+                ->with('item.itemImages')
+                ->paginate(10);
+
+            $this->items = $likedItems->getCollection()->map(fn($likedItem) => $likedItem->item);
+
+            $this->likedItems = $likedItems;
         }
     }
 
     public function render()
     {
-        return view('livewire.item-list');
+        return view('livewire.item-list', [
+            'items' => $this->items,
+            'likedItems' => $this->likedItems ?? null,
+        ]);
     }
 }
