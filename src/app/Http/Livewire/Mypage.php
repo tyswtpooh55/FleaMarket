@@ -44,7 +44,7 @@ class Mypage extends Component
 
             $this->items = $boughtItems->getCollection()->map(fn($boughtItem) => $boughtItem->item);
 
-            $this->$boughtItems = $boughtItems;
+            $this->boughtItems = $boughtItems;
         }
 
     }

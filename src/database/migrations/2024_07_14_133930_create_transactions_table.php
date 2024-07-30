@@ -23,6 +23,9 @@ class CreateTransactionsTable extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('method_id')
+                ->constrained('payment_methods')
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }

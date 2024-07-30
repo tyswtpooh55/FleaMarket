@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/purchase_address.css') }}">
 @endsection
 
+
 @section('header')
 
 @endsection
+
 
 @section('content')
     <div class="purchase-address__content">
