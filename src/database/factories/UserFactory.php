@@ -14,11 +14,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $dummyImgDir = storage_path('app/public/images/dummyImages');
+        $images = glob($dummyImgDir . '/*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+
+        $randomImage = $images ? $images[array_rand($images)] : null;
+
+
+        $imgUrl = $randomImage ? str_replace(storage_path('app/public/'), '', $randomImage) : null;
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'email_verified_at' => null,
+            'password' => bcrypt('pass1234'), // password
+            'img_url' => $imgUrl,
             'remember_token' => Str::random(10),
         ];
     }

@@ -7,15 +7,23 @@
 
 @section('content')
     <div class="item__content">
+
+        @if ($itemImages->isNotEmpty())
         <div class="item__img">
-            @if ($item->itemImages->isNotEmpty())
-            <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
+
+            @if (count($itemImages) == 1)
+                        <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
             @else
+                @livewire('image-carousel', ['images' => $itemImages])
+            @endif
+
+        </div>
+        @else
             <div class="item__img--none">
                 <span class="item__img--none-txt">No Image</span>
             </div>
-            @endif
-        </div>
+        @endif
+
         <div class="item__data">
             <div class="item__data--name">
                 <h3 class="data__name--txt">{{ $item->name }}</h3>

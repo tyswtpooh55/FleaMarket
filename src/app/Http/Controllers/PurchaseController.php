@@ -18,6 +18,7 @@ class PurchaseController extends Controller
     public function index($id)
     {
         $item = Item::findOrFail($id);
+        $itemImages = $item->itemImages;
         $user = Auth::user();
 
         //支払い方法をpaymentMethodSelectionメソッドで保存したsession('method_id')から取得
@@ -50,6 +51,7 @@ class PurchaseController extends Controller
 
         return view('purchase', compact(
             'item',
+            'itemImages',
             'user',
             'method',
         ));

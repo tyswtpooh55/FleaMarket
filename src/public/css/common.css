@@ -63,3 +63,42 @@ body {
 .main {
     margin: 50px auto;
 }
+
+/*ページネーション*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagination li:not(.active) {
+    border: 1px solid #dfdfdf;
+    padding: 10px 25px;
+    font-size: 20px;
+}
+
+.pagination li:not(:last-child) {
+    border-right: none;
+}
+
+.pagination a {
+    color: #f55;
+    text-decoration: none;
+}
+
+.pagination__link {
+    text-decoration: none;
+}
+
+.disabled {
+    background-color: #fff;
+}
+
+.active {
+    padding: 10px 25px;
+    border: 1px solid #dfdfdf;
+    background-color: #f55;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+}

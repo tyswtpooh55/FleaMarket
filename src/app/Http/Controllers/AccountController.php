@@ -41,38 +41,29 @@ class AccountController extends Controller
             $postcode = preg_replace('/(\d{3})(\d{4})/', '$1-$2', $postcode);
         }
 
+        if ($request->hasFile('imgUrl')) {
+            if ($user->img_url) {
+                Storage::delete($user->img_url);
+            }
+            $path = $request->file('imgUrl')
+                ->store('public/images/profile');
+            $user->img_url = str_replace('public', '', $path);
+        }
+
+        $user->name = $request->input('name');
+        $user->save();
+
+        //$user->profile有→データ更新、無→データ作成
         if ($user->profile) {
             $profile = $user->profile;
-
-            $user->name = $request->input('name');
-            $user->save();
 
             $profile->postcode = $postcode;
             $profile->address = $request->input('address');
             $profile->building = $request->input('building');
 
-            if ($request->hasFile('imgUrl')) {
-                if ($profile->img_url) {
-                    Storage::delete($profile->img_url);
-                }
-                $path = $request->file('imgUrl')
-                    ->store('public/images/profile');
-                $user->img_url = str_replace('public', '', $path);
-            }
-
             $profile->save();
 
         } else {
-            $user->name = $request->input('name');
-            $user->save();
-
-            $path = null;
-            if ($request->hasFile('imgUrl')) {
-                $path = $request->file('imgUrl')
-                    ->store('public/images/profile');
-                $user->img_url = str_replace('public', '', $path);
-            }
-
             Profile::create([
                 'user_id' => $user->id,
                 'postcode' => $postcode,

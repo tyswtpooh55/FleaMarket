@@ -14,17 +14,27 @@ class ItemList extends Component
 
     public $activeTab = 'recommendation';
     protected $items;
-    protected $likedItems;
+    public $randomOrder = [];
 
     public function mount()
     {
+        $this->generateRandomOrder();
         $this->loadItems();
     }
 
     public function setTab($tab)
     {
         $this->activeTab = $tab;
+        $this->resetPage();
+        $this->generateRandomOrder();
         $this->loadItems();
+    }
+
+    public function generateRandomOrder()
+    {
+        $this->randomOrder = Item::pluck('id')
+            ->shuffle()
+            ->toArray();
     }
 
     public function loadItems()
@@ -32,23 +42,28 @@ class ItemList extends Component
         $user = Auth::user();
 
         if ($this->activeTab == "recommendation") {
-            $this->items = Item::paginate(10);
-        } else {
-            $likedItems = Like::where('user_id', $user->id)
-                ->with('item.itemImages')
+            $this->items = Item::whereIn('id', $this->randomOrder)
+                ->orderByRaw('FIELD(id, ' . implode(',' , $this->randomOrder) . ')')
                 ->paginate(10);
-
-            $this->items = $likedItems->getCollection()->map(fn($likedItem) => $likedItem->item);
-
-            $this->likedItems = $likedItems;
+        } else {
+            $this->items = Like::where('user_id', $user->id)
+                ->with(['item.itemImages'])
+                ->paginate(10)
+                ->through(function ($like) {
+                    return $like->item;
+                });
         }
+    }
+
+    public function updatedPage()
+    {
+        $this->loadItems();
     }
 
     public function render()
     {
         return view('livewire.item-list', [
             'items' => $this->items,
-            'likedItems' => $this->likedItems ?? null,
         ]);
     }
 }

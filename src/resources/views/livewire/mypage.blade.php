@@ -43,8 +43,6 @@
         </ul>
     </div>
     <div class="pagination">
-        @if ($activeTab == 'bought' && $boughtItems)
-        {{ $boughtItems->links() }}
-        @endif
+        {{ $items->links('vendor.pagination.default') }}
     </div>
 </div>

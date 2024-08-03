@@ -11,7 +11,7 @@
             <div class="user__info">
                 <div class="user__img">
                     @if ($user->img_url)
-                    <img src="{{ $user->img_url }}" alt="" class="user__img--img">
+                    <img src="{{ Storage::url($user->img_url) }}" alt="" class="user__img--img">
                     @endif
                 </div>
                 <div class="user__name">

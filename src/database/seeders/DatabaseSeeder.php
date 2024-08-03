@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ConditionsTableSeeder::class,
             PaymentMethodsTableSeeder::class,
             MasterDatabaseSeeder::class,
+            RelatedItemsTableSeeder::class,
         ]);
     }
 }
