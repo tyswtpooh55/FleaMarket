@@ -1,0 +1,27 @@
+.credit__content {
+    width: 70%;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.credit__ttl {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 70px auto;
+}
+
+.credit__msg {
+    font-size: 24px;
+    margin: 70px auto;
+}
+
+.credit__link--top {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 20px;
+    background: #f55;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 50px;
+}

@@ -31,7 +31,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/item-img', ItemImg::class)->name('item-img');
     Route::post('/sale', [ItemController::class, 'sale'])->name('sale');
     Route::post('/item/{item_id}/comment/create', [ItemController::class, 'createComment'])->name('comment.create');
+    // 購入
     Route::get('/purchase/item/{item_id}', [PurchaseController::class, 'index'])->name('purchase');
     Route::get('/purchase/address', [PurchaseController::class, 'address'])->name('purchase.address');
     Route::post('/purchase/address/update', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+    // 支払い方法
+    Route::prefix('payment')->name('payment.')->group(function () {
+        Route::get('/method', [PurchaseController::class, 'paymentMethod'])->name('method');
+        Route::get('/method/select', [PurchaseController::class, 'paymentMethodSelection'])->name('method.select');
+        Route::post('/stripe', [PurchaseController::class, 'stripe'])->name('stripe');
+        Route::get('/success', [PurchaseController::class, 'paymentSuccess'])->name('success');
+        Route::get('/failed', [PurchaseController::class, 'paymentFailed'])->name('failed');
+    });
+
 });

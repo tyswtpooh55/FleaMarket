@@ -1,0 +1,50 @@
+.payment-method__content {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.heading__ttl {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.method__form {
+    width: 250px;
+    margin: 60px auto;
+}
+
+.method__form--item {
+    text-align: left;
+    margin: 20px auto;
+}
+
+.method__form--input {
+    transform: scale(1.5);
+    accent-color: #f55;
+    cursor: pointer;
+}
+
+.method__form--label {
+    font-size: 24px;
+    text-align: left;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.method__form--input:checked+label {
+    color: #f55;
+    font-weight: 700;
+}
+
+.method__form--btn {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #f55;
+    color: #fff;
+    font-size: 26px;
+    margin: 50px auto;
+    cursor: pointer;
+}

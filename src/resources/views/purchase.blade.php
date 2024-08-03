@@ -25,11 +25,11 @@
             </div>
             <div class="purchase__option">
                 <p class="option__ttl">支払い方法</p>
-                <a href="" class="option__link">変更する</a>
+                <a href="{{ route('payment.method') }}" class="option__link">変更する</a>
             </div>
             <div class="purchase__option">
                 <p class="option__ttl">配送先</p>
-                <a href="{{ route('purchase.address', $user->id) }}" class="option__link">変更する</a>
+                <a href="{{ route('purchase.address') }}" class="option__link">変更する</a>
             </div>
         </div>
         <div class="purchase__payment">
@@ -49,12 +49,12 @@
                     </tr>
                     <tr class="payment__row">
                         <th class="payment__label">支払い方法</th>
-                        <td class="payment__data">コンビニ払い</td>
+                        <td class="payment__data">{{ $method->method }}</td>
                     </tr>
                 </table>
             </div>
             <div class="payment__form">
-                <form action="" method="POST">
+                <form action="{{ route('payment.stripe') }}" method="POST">
                     @csrf
                     <button type="submit" class="payment__btn">購入する</button>
                 </form>
