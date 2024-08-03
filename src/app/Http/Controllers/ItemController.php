@@ -13,19 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
-    public function test()
-    {
-        return view('search_items');
-    }
-
     public function index()
     {
-        $items = Item::inRandomOrder()
-            ->get();
-
-        return view('index', compact(
-            'items',
-        ));
+        return view('index');
     }
 
     public function search(Request $request)
@@ -106,6 +96,7 @@ class ItemController extends Controller
     public function detail($id)
     {
         $item = Item::findOrFail($id);
+        $itemImages = $item->itemImages;
 
         $countLikes = $item->likes->count();
 
@@ -115,6 +106,7 @@ class ItemController extends Controller
 
         return view('item', compact(
             'item',
+            'itemImages',
             'countLikes',
             'countComments',
             'categories',

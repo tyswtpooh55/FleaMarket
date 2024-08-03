@@ -46,9 +46,7 @@
             </ul>
         </div>
         <div class="pagination">
-            @if ($activeTab == 'mylist' && $likedItems)
-            {{ $likedItems->links() }}
-            @endif
+            {{ $items->links('vendor.pagination.default') }}
         </div>
 
     </div>

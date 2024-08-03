@@ -9,15 +9,17 @@
     <div class="purchase__content">
         <div class="purchase__order">
             <div class="purchase__item">
+
+                @if ($itemImages->isNotEmpty())
                 <div class="item__img">
-                    @if ($item->itemImages->isNotEmpty())
                     <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
-                    @else
-                    <div class="item__img--none">
-                        <span class="item__img--none-txt">No Image</span>
-                    </div>
-                    @endif
                 </div>
+                @else
+                <div class="item__img--none">
+                    <span class="item__img--none-txt">No Image</span>
+                </div>
+                @endif
+
                 <div class="item__data">
                     <p class="item__name">{{ $item->name }}</p>
                     <p class="item__price">¥{{ number_format($item->price) }}</p>

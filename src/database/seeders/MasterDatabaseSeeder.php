@@ -18,6 +18,11 @@ class MasterDatabaseSeeder extends Seeder
             'name' => 'Customer1',
             'email' => 'customer1@example.com',
             'password' => bcrypt('pass1234'),
+            'img_url' => 'images/dummyImages/bat.png'
         ]);
+
+        User::factory()
+            ->count(10)
+            ->create();
     }
 }

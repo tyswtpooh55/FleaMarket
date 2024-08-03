@@ -9,8 +9,7 @@ class ProfileImg extends Component
 {
     use WithFileUploads;
 
-    public $newImgUrl;
-    public $imgPreview;
+    public $img;
     public $nowImgUrl;
 
     public function mount($nowImgUrl)
@@ -18,9 +17,11 @@ class ProfileImg extends Component
         $this->nowImgUrl = $nowImgUrl;
     }
 
-    public function newImgUrl()
+    public function updatedImg()
     {
-        $this->imgPreview = $this->newImgUrl->temporaryUrl();
+        $this->validate([
+            'img' => 'image|max:1024',
+        ]);
     }
 
     public function render()

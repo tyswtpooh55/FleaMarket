@@ -14,7 +14,6 @@ class Mypage extends Component
 
     public $activeTab = 'exhibit';
     protected $items;
-    protected $boughtItems;
 
     public function mount()
     {
@@ -38,13 +37,12 @@ class Mypage extends Component
                 ->paginate(10);
         } else {
             //購入した商品
-            $boughtItems = Transaction::where('buyer_id', $user->id)
-                ->with('item.itemImages')
-                ->paginate(10);
-
-            $this->items = $boughtItems->getCollection()->map(fn($boughtItem) => $boughtItem->item);
-
-            $this->boughtItems = $boughtItems;
+            $this->items = Transaction::where('buyer_id', $user->id)
+                ->with(['item.itemImages'])
+                ->paginate(10)
+                ->through(function ($transaction) {
+                    return $transaction->item;
+                });
         }
 
     }
@@ -53,7 +51,6 @@ class Mypage extends Component
     {
         return view('livewire.mypage', [
             'items' => $this->items,
-            'boughtItems' => $this->boughtItems ?? null,
         ]);
     }
 }

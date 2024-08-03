@@ -4,23 +4,21 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use RuntimeException;
 
 class ItemImg extends Component
 {
     use WithFileUploads;
 
-    public $img;
-    public $photoStatus = false;
-    public $preview_url;
+    public $imgs = [];
 
     public function updatedImg()
     {
-        try {
-            $this->preview_url = $this->img->temporaryUrl();
-            $this->photoStatus = true;
-        } catch (RuntimeException $e) {
-            $this->photoStatus = false;
+        $this->validate([
+            'imgs.*' => 'image|max:1024',
+        ]);
+
+        foreach ($$this->imgs as $img) {
+            $img->store('imgs');
         }
     }
 
