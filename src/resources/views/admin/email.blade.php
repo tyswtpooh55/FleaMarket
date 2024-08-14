@@ -55,11 +55,11 @@
             @livewire('email-recipients-select')
 
             <div class="writing__box">
-                <label for="subject" class="email__label">件名</label>
+                <label for="subject" class="email__label">Subject</label>
                 <input type="text" name="subject" id="subject" class="email__sub--input">
             </div>
             <div class="writing__box">
-                <label for="message" class="email__label">本文</label>
+                <label for="message" class="email__label">Message</label>
                 <textarea name="message" id="message" class="email__msg--textarea"></textarea>
             </div>
             <div class="sending__btn">

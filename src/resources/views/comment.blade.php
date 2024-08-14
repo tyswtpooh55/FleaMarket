@@ -30,7 +30,7 @@
                 <p class="data__price--txt">¥{{ number_format($item->price) }}</p>
             </div>
             <div class="item__data--btn">
-                @if (Auth::check())
+                @if (Auth::check() && !$item->transactions)
 
                 @livewire('like-toggle', ['itemId' => $item->id])
 
@@ -132,7 +132,7 @@
             </div>
             @if ($item->transactions)
             <div class="comment__form">
-                <button disabled="disabled" class="comment__form--btn">Sold Out</button>
+                <button disabled="disabled" class="comment__form--btn comment__form--btn--sold-out">Sold Out</button>
             </div>
             @else
             <div class="comment__form">

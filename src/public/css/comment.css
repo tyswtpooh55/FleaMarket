@@ -221,6 +221,10 @@
     cursor: pointer;
 }
 
+.comment__form--btn--sold-out {
+    cursor: not-allowed;
+}
+
 
 .comment__none {
     text-align: center;
