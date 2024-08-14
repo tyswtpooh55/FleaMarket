@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             PaymentMethodsTableSeeder::class,
             MasterDatabaseSeeder::class,
             RelatedItemsTableSeeder::class,
+            LikesTableSeeder::class,
+            CommentsTableSeeder::class,
+            TransactionsTableSeeder::class,
         ]);
     }
 }

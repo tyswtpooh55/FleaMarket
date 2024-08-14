@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Condition;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ItemFactory extends Factory
+class LikeFactory extends Factory
 {
-    protected $model = Item::class;
     /**
      * Define the model's default state.
      *
@@ -18,15 +16,11 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
-            'brand' => $this->faker->company(),
-            'price' => $this->faker->numberBetween(100, 50000),
-            'description' => $this->faker->realText(),
-            'seller_id' => User::withoutRole('admin')
+            'user_id' => User::withoutRole('admin')
                 ->inRandomOrder()
                 ->first()
                 ->id,
-            'condition_id' => Condition::inRandomOrder()
+            'item_id' => Item::inRandomOrder()
                 ->first()
                 ->id,
         ];

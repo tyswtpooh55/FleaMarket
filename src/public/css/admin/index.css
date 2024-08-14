@@ -1,0 +1,30 @@
+.admin__content {
+    margin: 50px;
+    text-align: center;
+}
+
+.admin__header {
+    padding: 50px;
+}
+
+.admin__header--ttl {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.admin__index ul {
+    list-style: none;
+}
+
+.admin__li {
+    margin: 50px auto;
+}
+
+.admin__btn {
+    border: none;
+    background-color: transparent;
+    color: #f55;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+}

@@ -57,6 +57,13 @@
                             <button class="header__nav--sell-btn">出品</button>
                         </form>
                     </li>
+                    @role('admin')
+                    <li class="header__nav--li">
+                        <form action="{{ route('admin.index') }}" method="GET" class="heaeder__nav--form">
+                            <button class="header__nav--btn">管理ページ</button>
+                        </form>
+                    </li>
+                    @endrole
                 </ul>
             </div>
         </div>

@@ -90,11 +90,11 @@ body {
     text-decoration: none;
 }
 
-.disabled {
+.pagination__disabled {
     background-color: #fff;
 }
 
-.active {
+.pagination__active {
     padding: 10px 25px;
     border: 1px solid #dfdfdf;
     background-color: #f55;

@@ -12,6 +12,6 @@
 /src/npm-debug.log
 /src/yarn-error.log
 /src/.idea
-/src/.vscode
+.vscode
 er.drawio
 /docker/mysql/data

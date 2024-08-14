@@ -26,7 +26,6 @@
                 </div>
             </li>
             @endforeach
-            {{ $searchItems->links() }}
             @else
             <div class="result__none">
                 <p class="result__none--msg">該当する商品はありません</p>
@@ -34,5 +33,8 @@
             @endif
 
         </ul>
+        <div class="pagination">
+            {{-- {{ $searchItems->links('vendor.pagination.default') }} --}}
+        </div>
     </div>
 @endsection

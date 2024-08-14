@@ -36,9 +36,9 @@ class ItemController extends Controller
                 });
         }
 
-        $searchItems = $items->paginate(10);
+        $searchItems = $items->get()/*->paginate(10)*/;
 
-        $countItems = $searchItems->total();
+        $countItems = $searchItems->count();
 
         return view('search_items', compact(
             'keyword',
@@ -116,6 +116,7 @@ class ItemController extends Controller
     public function comment($item_id)
     {
         $item = Item::findOrFail($item_id);
+        $itemImages = $item->itemImages;
         $comments = Comment::where('item_id', $item_id)
             ->orderby('created_at', 'asc')
             ->get();
@@ -124,6 +125,7 @@ class ItemController extends Controller
 
         return view('comment', compact(
             'item',
+            'itemImages',
             'comments',
             'countLikes',
             'countComments',
