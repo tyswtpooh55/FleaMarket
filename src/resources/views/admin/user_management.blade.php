@@ -74,7 +74,7 @@
                         {{ $user->items->count() }}
                     </td>
                     <td class="user__data">
-                        {{ $user->items->filter(function($item) { return $item->transactions->count() > 0; })->count() }}
+                        {{ $user->items->filter(function($item) { return $item->transaction->count() > 0; })->count() }}
                     </td>
                     <td class="user__data">
                         {{ $user->transactions->count() }}
