@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Item;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

@@ -42,7 +42,7 @@ class Item extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function transactions() {
-        return $this->hasMany(Transaction::class);
+    public function transaction() {
+        return $this->hasOne(Transaction::class);
     }
 }

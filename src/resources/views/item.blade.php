@@ -31,7 +31,7 @@
                 <p class="data__price--txt">¥{{ number_format($item->price) }}</p>
             </div>
             <div class="item__data--btn">
-                @if (Auth::check() && $item->transactions->isEmpty())
+                @if (Auth::check() && empty($item->transactions))
 
                 @livewire('like-toggle', ['itemId' => $item->id])
 
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="item__data--purchase-btn">
-                @if ($item->transactions->isNotEmpty())
+                @if (!empty($item->transaction))
                 <button disabled="disabled" class="data__purchase-btn--btn data__purchase--btn--sold-out">Sold Out</button>
                 @else
                 <form action="{{ route('purchase', $item->id) }}" method="GET">
