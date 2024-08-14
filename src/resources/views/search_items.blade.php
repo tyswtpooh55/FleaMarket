@@ -22,6 +22,9 @@
                         @else
                         <div class="item__img--none"><span class="item__img--none-name">{{ $item->name }}</span></div>
                         @endif
+                        @if ($item->transactions->isNotEmpty())
+                        <span class="item__sold-out">Sold Out</span>
+                        @endif
                     </a>
                 </div>
             </li>
@@ -34,7 +37,7 @@
 
         </ul>
         <div class="pagination">
-            {{-- {{ $searchItems->links('vendor.pagination.default') }} --}}
+            {{ $searchItems->links('vendor.pagination.default') }}
         </div>
     </div>
 @endsection

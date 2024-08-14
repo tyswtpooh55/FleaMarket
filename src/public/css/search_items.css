@@ -43,16 +43,30 @@
     align-items: center;
 }
 
-.item__img--none-name,
-.item__img--none-txt {
+.item__img--none-name {
     font-size: 20px;
     font-weight: 700;
     margin: 0 auto;
 }
 
-.item__img,
-.item__img--none {
+.item__img {
     border-radius: 4px;
+    box-shadow: 3px 3px 5px #d9d9d9;
+    position: relative;
+}
+
+.item__sold-out {
+    position: absolute;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
+    background-color: #f55;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1;
 }
 
 .result__none {

@@ -36,9 +36,9 @@ class ItemController extends Controller
                 });
         }
 
-        $searchItems = $items->get()/*->paginate(10)*/;
+        $searchItems = $items->paginate(10)->appends(['search' => $keyword]);
 
-        $countItems = $searchItems->count();
+        $countItems = $searchItems->total();
 
         return view('search_items', compact(
             'keyword',

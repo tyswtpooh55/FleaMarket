@@ -29,6 +29,8 @@ class TransactionFactory extends Factory
             ->inRandomOrder()
             ->first();
 
+        $usedItemId[] = $item->id;
+
         return [
             'item_id' => $item->id,
             'buyer_id' => $buyer->id,
