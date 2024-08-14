@@ -8,9 +8,8 @@
         <div class="heading__line"></div>
     </div>
     <div class="mypage__item">
-        <ul class="item__ul">
-            @if (count($items) > 0)
-
+        @if (count($items) > 0)
+            <ul class="item__ul">
                 @foreach ($items as $item)
                 <li class="item__li">
                     <div class="item__img">
@@ -20,18 +19,21 @@
                             @else
                             <div class="item__img--none"><span class="item__img--none-name">{{ $item->name }}</span></div>
                             @endif
+                            @if ($item->transactions->isNotEmpty())
+                            <span class="item__sold-out">Sold Out</span>
+                            @endif
                         </a>
                     </div>
                 </li>
                 @endforeach
-            @else
+            </ul>
+        @else
 
-                <div class="item__none">
-                    <p class="item__none--msg">No Item</p>
-                </div>
+            <div class="item__none">
+                <p class="item__none--msg">No Item</p>
+            </div>
 
-            @endif
-        </ul>
+        @endif
     </div>
     <div class="pagination">
         {{ $items->links('vendor.pagination.default') }}

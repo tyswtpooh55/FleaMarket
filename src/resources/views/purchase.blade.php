@@ -55,7 +55,7 @@
                     </tr>
                 </table>
             </div>
-            @if ($item->transactions)
+            @if ($item->transactions->isNotEmpty())
             <div class="payment__form">
                 <button disabled="disabled" class="payment__btn payment__btn--sold-out">Sold Out</button>
             </div>
