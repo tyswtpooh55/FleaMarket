@@ -11,10 +11,9 @@
             <div class="heading__line"></div>
         </div>
         <div class="index__item">
+            @if (count($items) > 0)
             <ul class="item__ul">
-                @if (count($items) > 0)
-
-                    @foreach ($items as $item)
+                @foreach ($items as $item)
                     <li class="item__li">
                         <div class="item__img">
                             <a href="{{ route('item', ['item_id' => $item->id]) }}" class="item__link">
@@ -26,15 +25,13 @@
                             </a>
                         </div>
                     </li>
-                    @endforeach
-
-                @else
-                    <div class="item__none">
-                        <p class="item__none--msg">No Item</p>
-                    </div>
-
-                @endif
+                @endforeach
             </ul>
+            @else
+            <div class="item__none">
+                <p class="item__none--msg">No Item</p>
+            </div>
+            @endif
         </div>
         <div class="pagination">
             {{ $items->links('vendor.pagination.default') }}

@@ -57,17 +57,17 @@
             </div>
             @if ($item->transactions)
             <div class="payment__form">
-                <button disabled="disabled"></button>
+                <button disabled="disabled" class="payment__btn payment__btn--sold-out">Sold Out</button>
             </div>
             @else
-
-            @endif
             <div class="payment__form">
                 <form action="{{ route('payment.stripe') }}" method="POST">
                     @csrf
                     <button type="submit" class="payment__btn">購入する</button>
                 </form>
             </div>
+            @endif
+
         </div>
     </div>
 @endsection
