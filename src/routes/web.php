@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Livewire\ItemImg;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/item-img', ItemImg::class)->name('item-img');
     Route::post('/sale', [ItemController::class, 'sale'])->name('sale');
     Route::post('/item/{item_id}/comment/create', [ItemController::class, 'createComment'])->name('comment.create');
+    Route::post('/item/{item_id}/comment/delete', [ItemController::class, 'deleteComment'])->name('comment.delete');
     // 購入
     Route::get('/purchase/item/{item_id}', [PurchaseController::class, 'index'])->name('purchase');
     Route::get('/purchase/address', [PurchaseController::class, 'address'])->name('purchase.address');
@@ -43,5 +45,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/success', [PurchaseController::class, 'paymentSuccess'])->name('success');
         Route::get('/failed', [PurchaseController::class, 'paymentFailed'])->name('failed');
     });
+});
+
+//管理者用ルート
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/manage/user', [AdminController::class, 'getUsers'])->name('users');
+    Route::post('/delete/user/{user_id}', [AdminController::class, 'deleteUser'])->name('delete.user');
+    Route::get('/email', [AdminController::class, 'writeEmail'])->name('write.email');
 
 });
+Route::post('/email', [AdminController::class, 'sendEmail'])->name('admin.send.email');

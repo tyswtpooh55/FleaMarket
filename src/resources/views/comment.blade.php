@@ -11,7 +11,7 @@
         <div class="item__img">
 
             @if (count($itemImages) == 1)
-            <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
+            <img src="{{ Storage::url($itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
             @else
             @livewire('image-carousel', ['images' => $itemImages])
             @endif
@@ -54,40 +54,72 @@
                     @foreach ($comments as $comment)
                         @if ($comment->user_id == $item->seller_id)
                         {{-- アイコン右 --}}
-                        <div class="comment__item">
-                            <div class="comment__seller">
-                                @if ($comment->user->name)
-                                <span class="comment__user-name">{{ $comment->user->name }}</span>
+                        <div class="comment__card">
+                            <div class="comment__user">
+
+                                {{-- コメント削除ボタン --}}
+                                @if (Auth::check() && Auth::user()->hasRole('admin') || Auth::id() == $comment->user->id)
+
+                                <div class="delete__comment">
+                                    <form action="{{ route('comment.delete', $comment->id) }}" method="post" class="delete__comment--form">
+                                        @csrf
+                                        <button type="submit" class="delete__comment--btn">&times;</button>
+                                    </form>
+                                </div>
                                 @else
-                                <span class="comment__user-name">Unknown</span>
+                                <div class="delete__comment"></div>
                                 @endif
-                                @if ($comment->user->img_url)
-                                <img src="{{ Storage::url($comment->user->img_url)}}" alt="icon" class="comment__user-img">
-                                @else
-                                <img src="/images/person.png" alt="icon" class="comment__user-img">
-                                @endif
+
+                                <div>
+                                    @if ($comment->user->name)
+                                    <span class="comment__user-name">{{ $comment->user->name }}</span>
+                                    @else
+                                    <span class="comment__user-name">Unknown</span>
+                                    @endif
+                                    @if ($comment->user->img_url)
+                                    <img src="{{ Storage::url($comment->user->img_url)}}" alt="icon" class="comment__user-img">
+                                    @else
+                                    <img src="/images/person.png" alt="icon" class="comment__user-img">
+                                    @endif
+                                </div>
                             </div>
                             <div class="comment__comment">
-                                <p class="comment__writen">{{ $comment->comment }}</p>
+                                <p class="comment__written">{{ $comment->comment }}</p>
                             </div>
                         </div>
                         @else
                         {{-- アイコン左 --}}
-                        <div class="comment__item">
+                        <div class="comment__card">
                             <div class="comment__user">
-                                @if ($comment->user->img_url)
-                                <img src="{{ Storage::url($comment->user->img_url)}}" alt="icon" class="comment__user-img">
+                                <div>
+                                    @if ($comment->user->img_url)
+                                    <img src="{{ Storage::url($comment->user->img_url)}}" alt="icon" class="comment__user-img">
+                                    @else
+                                    <img src="/images/person.png" alt="icon" class="comment__user-img">
+                                    @endif
+                                    @if ($comment->user->name)
+                                    <span class="comment__user-name">{{ $comment->user->name }}</span>
+                                    @else
+                                    <span class="comment__user-name">Unknown</span>
+                                    @endif
+                                </div>
+
+                                {{-- コメント削除ボタン --}}
+                                @if (Auth::check() && Auth::user()->hasRole('admin') || Auth::id() == $comment->user_id)
+                                <div class="delete__comment">
+                                    <form action="{{ route('comment.delete', $comment->id) }}" method="post" class="delete__comment--form">
+                                        @csrf
+                                        <button type="submit" class="delete__comment--btn">&times;</button>
+                                    </form>
+                                </div>
+
                                 @else
-                                <img src="/images/person.png" alt="icon" class="comment__user-img">
+                                <div class="delete__comment"></div>
                                 @endif
-                                @if ($comment->user->name)
-                                <span class="comment__user-name">{{ $comment->user->name }}</span>
-                                @else
-                                <span class="comment__user-name">Unknown</span>
-                                @endif
+
                             </div>
                             <div class="comment__comment">
-                                <p class="comment__writen">{{ $comment->comment }}</p>
+                                <p class="comment__written">{{ $comment->comment }}</p>
                             </div>
                         </div>
                         @endif
@@ -98,13 +130,17 @@
                     </div>
                 @endif
             </div>
+            @if ($item->transactions)
+            <div class="comment__form">
+                <button disabled="disabled" class="comment__form--btn">Sold Out</button>
+            </div>
+            @else
             <div class="comment__form">
                 @if (Auth::check())
                 <form action="{{ route('comment.create', $item->id) }}" method="POST" class="comment__form--form">
                     @csrf
                     <label for="comment" class="comment__form--label">商品へのコメント</label>
                     <textarea name="comment" class="comment__form--textarea"></textarea>
-                    </div>
                     <button type="submit" class="comment__form--btn">コメントを送信する</button>
                 </form>
                 @else
@@ -114,6 +150,8 @@
                 @endif
 
             </div>
+            @endif
+
         </div>
     </div>
 @endsection

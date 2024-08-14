@@ -24,20 +24,11 @@
                     </div>
                 </li>
                 @endforeach
-
-                @for ($i = count($items); $i < 10; $i++)
-                <li class="item__li">
-                    <div class="item__img--none"><span class="item__img--none-txt">No Item</span></div>
-                </li>
-                @endfor
-
             @else
 
-                @for ($i = count($items); $i < 10; $i++)
-                <li class="item__li">
-                    <div class="item__img--none"><span class="item__img--none-txt">No Item</span></div>
-                </li>
-                @endfor
+                <div class="item__none">
+                    <p class="item__none--msg">No Item</p>
+                </div>
 
             @endif
         </ul>

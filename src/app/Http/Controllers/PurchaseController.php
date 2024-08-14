@@ -144,7 +144,7 @@ class PurchaseController extends Controller
                 return redirect()->route('payment.failed');
         }
 
-        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        Stripe::setApiKey(config('services.stripe.secret'));
 
         $sessionParams = [
             'customer' => Customer::create()->id,

@@ -17,7 +17,7 @@ class RelatedItemsTableSeeder extends Seeder
     public function run()
     {
         Item::factory()
-            ->count(20)
+            ->count(50)
             ->has(ItemImage::factory()->count(3), 'itemImages')
             ->create();
 
