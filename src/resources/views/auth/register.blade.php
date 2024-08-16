@@ -14,9 +14,7 @@
 
 @section('content')
     <div class="auth__content">
-        <div class="auth__heading">
             <h2 class="heading__ttl">会員登録</h2>
-        </div>
         <div class="auth__form">
             <form action="/register" method="POST" class="auth__form-form">
                 @csrf
@@ -36,7 +34,7 @@
                 </div>
                 <button class="auth__form--btn">登録する</button>
             </form>
-                <a href="/login" class="auth__link">ログインはこちら</a>
+            <a href="/login" class="auth__link">ログインはこちら</a>
         </div>
     </div>
 @endsection

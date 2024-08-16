@@ -119,6 +119,12 @@ class PurchaseController extends Controller
     public function stripe()
     {
         $user = Auth::user();
+
+        //住所未登録の場合、住所変更ページへリダイレクト
+        if (empty($user->profile)) {
+            return redirect()->route('purchase.address');
+        }
+
         //indexメソッドで保存したsession('transaction_data')を取得
         $transactionData = session('transaction_data' . $user->id);
         //transactionsTableに取引内容を作成
@@ -205,7 +211,7 @@ class PurchaseController extends Controller
         }
         session()->forget('transaction_data' . $user->id); //session('transaction_data')を削除
 
-        return view('payments/failed');
+        return view('payments/credit_failed');
     }
 
     /*

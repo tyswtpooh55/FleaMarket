@@ -1,17 +1,18 @@
 <div>
-    <div class="index__content">
-        <div class="index__heading">
-            <div class="heading__tab">
-                <button class="heading__tab--ttl {{ $activeTab == 'recommendation' ? 'active' : '' }}" wire:click.prevent="setTab('recommendation')">おすすめ</button>
-                @if (Auth::check())
-                <button class="heading__tab--ttl {{ $activeTab == 'mylist' ? 'active' : '' }}" wire:click.prevent="setTab('mylist')">マイリスト</button>
-                @endif
+    <div class="index__heading">
+        <div class="heading__tab">
+            <button class="heading__tab--ttl {{ $activeTab == 'recommendation' ? 'active' : '' }}" wire:click.prevent="setTab('recommendation')">おすすめ</button>
 
-            </div>
-            <div class="heading__line"></div>
+            @if (Auth::check())
+            <button class="heading__tab--ttl {{ $activeTab == 'mylist' ? 'active' : '' }}" wire:click.prevent="setTab('mylist')">マイリスト</button>
+            @endif
+
         </div>
-        <div class="index__item">
-            @if (count($items) > 0)
+        <div class="heading__line"></div>
+    </div>
+
+    <div class="index__item">
+        @if (count($items) > 0)
             <ul class="item__ul">
                 @foreach ($items as $item)
                     <li class="item__li">
@@ -30,15 +31,13 @@
                     </li>
                 @endforeach
             </ul>
-            @else
+        @else
             <div class="item__none">
                 <p class="item__none--msg">No Item</p>
             </div>
-            @endif
-        </div>
-        <div class="pagination">
-            {{ $items->links('vendor.pagination.default') }}
-        </div>
-
+        @endif
+    </div>
+    <div class="pagination">
+        {{ $items->links('vendor.pagination.default') }}
     </div>
 </div>

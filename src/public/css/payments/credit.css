@@ -25,3 +25,21 @@
     color: #fff;
     margin-top: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .credit__content {
+        width: 90%;
+    }
+
+    .credit__ttl {
+        font-size: 24px;
+    }
+
+    .credit__msg {
+        font-size: 18px;
+    }
+
+    .credit__link--top {
+        font-size: 18px;
+    }
+}

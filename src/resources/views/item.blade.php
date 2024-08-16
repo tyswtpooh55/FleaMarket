@@ -9,16 +9,23 @@
     <div class="item__content">
 
         @if ($itemImages->isNotEmpty())
-        <div class="item__img">
+        {{-- 商品イメージがあり --}}
 
             @if (count($itemImages) == 1)
-                        <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
+            {{-- 商品のイメージが１枚 --}}
+                <div class="item__img">
+                    <img src="{{ Storage::url($item->itemImages->first()->img_url) }}" alt="{{ $item->name }}" class="item__img--img">
+                </div>
+
             @else
-                @livewire('image-carousel', ['images' => $itemImages])
+            {{-- 商品イメージが複数枚 --}}
+                <div class="item__img">
+                    @livewire('image-carousel', ['images' => $itemImages])
+                </div>
             @endif
 
-        </div>
         @else
+        {{-- 商品イメージ未登録 --}}
             <div class="item__img--none">
                 <span class="item__img--none-txt">No Image</span>
             </div>

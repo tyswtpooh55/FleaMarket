@@ -7,9 +7,7 @@
 
 @section('content')
     <div class="profile__content">
-        <div class="profile__heading">
-            <h3 class="heading__ttl">プロフィール設定</h3>
-        </div>
+        <h3 class="heading__ttl">プロフィール設定</h3>
         <div class="profile__form">
             <form action="{{ route('mypage.profile.update') }}" method="POST" enctype="multipart/form-data" class="profile__form--form">
                 @csrf

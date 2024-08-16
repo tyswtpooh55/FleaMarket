@@ -11,7 +11,8 @@
 }
 
 .sell__form {
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     margin: 80px auto;
 }
 
@@ -79,7 +80,6 @@
 .sell__form--select {
     display: block;
     width: 100%;
-    height: 45px;
     font-size: 20px;
     padding: 10px;
     border: solid 1px #5f5f5f;
@@ -120,7 +120,7 @@
 
 .sell__form--btn {
     width: 100%;
-    height: 60px;
+    padding: 10px;
     margin: 80px auto;
     border: none;
     border-radius: 5px;
@@ -129,4 +129,36 @@
     font-size: 26px;
     font-weight: 700;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .sell__heading--ttl {
+        font-size: 24px;
+    }
+
+    .sell__form--label {
+        font-size: 18px;
+    }
+
+    .sell__form--ttl h3 {
+        font-size: 20px;
+    }
+
+    .sell__form--input,
+    .sell__form--select,
+    .sell__form--textarea {
+        font-size: 16px;
+    }
+
+    .sell__form--price::before {
+        font-size: 16px;
+    }
+
+    .sell__form--input[name="price"] {
+        padding-left: 25px;
+    }
+
+    .sell__form--btn {
+        font-size: 18px;
+    }
 }
