@@ -2,7 +2,8 @@
     width: 80%;
     margin: 100px auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .item__img--carousel {
@@ -14,9 +15,8 @@
 
 .item__img {
     width: 450px;
-    height: 550px;
+    height: auto;
     margin: 50px;
-    align-items: center;
 }
 
 .item__img--img {
@@ -36,16 +36,18 @@
 .carousel-controls__btn {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
+    border-radius: 90%;
     color: #fff;
     padding: 10px;
-    font-size: 1.5em;
+    font-size: 24px;
+    font-weight: 700;
     cursor: pointer;
 }
 
 .item__img--thumbnails {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin: 20px auto;
 }
 
 .item__img--thumbnail {
@@ -78,7 +80,7 @@
 
 .item__data {
     margin: 50px;
-    width: 40%;
+    max-width: 450px;
 }
 
 .data__name--txt {
@@ -105,8 +107,7 @@
     margin: 30px 0;
 }
 
-.item__data--btn-like,
-.item__data--btn-comment {
+.item__data--btn-like {
     margin-right: 60px;
 }
 
@@ -187,11 +188,13 @@
     font-weight: 700;
     color: #000;
     padding-right: 60px;
+    white-space: nowrap;
 }
 
 .info__data {
     font-size: 20px;
     color: #000;
+    white-space: nowrap;
 }
 
 .category {
@@ -203,4 +206,80 @@
     text-align: center;
     margin-right: 20px;
     margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .item__content {
+        width: 90%;
+    }
+
+    .item__img,
+    .item__img--none {
+        width: 100%;
+        max-width: 450px;
+        margin: 50px 10px;
+    }
+
+    .item__img--none {
+        height: auto;
+        padding: 40% 0;
+    }
+
+    .item__data {
+        width: 100%;
+    }
+
+    .data__name--txt {
+        font-size: 30px;
+    }
+
+    .data__brand--txt {
+        font-size: 18px;
+    }
+
+    .data__price--txt {
+        font-size: 26px
+    }
+
+    .item__data--btn-like {
+        margin-right: 30px;
+    }
+
+    .like__img,
+    .comment__img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .like-count,
+    .comment-count {
+        font-size: 14px;
+    }
+
+    .data__purchase-btn--btn {
+        font-size: 22px;
+    }
+
+    .data__detail--ttl,
+    .data__info--ttl {
+        font-size: 24px;
+    }
+
+    .data__detail--detail {
+        font-size: 16px;
+    }
+
+    .info__label {
+        font-size: 14px;
+    }
+
+    .info__data {
+        font-size: 12px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        margin-right: 10px;
+    }
 }

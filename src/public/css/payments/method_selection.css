@@ -1,16 +1,18 @@
 .payment-method__content {
     width: 80%;
-    margin: 50px auto;
-    text-align: center;
+    margin: 0 auto;
 }
 
 .heading__ttl {
     font-size: 36px;
+    margin: 50px auto;
     font-weight: 700;
+    color: #000;
+    text-align: center;
 }
 
 .method__form {
-    width: 250px;
+    width: 300px;
     margin: 60px auto;
 }
 
@@ -47,4 +49,22 @@
     font-size: 26px;
     margin: 50px auto;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .payment-method__content {
+        width: 90%;
+    }
+
+    .heading__ttl {
+        font-size: 24px;
+    }
+
+    .method__form--label {
+        font-size: 18px;
+    }
+
+    .method__form--btn {
+        font-size: 22px;
+    }
 }

@@ -34,17 +34,12 @@
 
 @section('content')
     <div class="user-manage__content">
-        <div class="user-manage__header">
-            <h3 class="user-manage__header--ttl">利用者一覧</h3>
-        </div>
+        <h3 class="user-manage__header--ttl">利用者一覧</h3>
         <div class="users__table">
             <table class="users__table--table">
                 <tr class="users__row">
                     <th class="user__label">
                         ユーザー名
-                    </th>
-                    <th class="user__label">
-                        メールアドレス
                     </th>
                     <th class="user__label">
                         出品数
@@ -68,13 +63,10 @@
                         {{ $user->name }}
                     </td>
                     <td class="user__data">
-                        {{ $user->email }}
-                    </td>
-                    <td class="user__data">
                         {{ $user->items->count() }}
                     </td>
                     <td class="user__data">
-                        {{ $user->items->filter(function($item) { return $item->transaction->count() > 0; })->count() }}
+                        {{ $user->items->filter(function($item) { return $item->transaction !== null; })->count() }}
                     </td>
                     <td class="user__data">
                         {{ $user->transactions->count() }}

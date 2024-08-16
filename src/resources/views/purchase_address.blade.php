@@ -13,9 +13,7 @@
 
 @section('content')
     <div class="purchase-address__content">
-        <div class="purchase-address__heading">
-            <h3 class="heading__ttl">住所の変更</h3>
-        </div>
+        <h3 class="heading__ttl">住所の変更</h3>
         <div class="address__form">
             <form action="{{ route('purchase.address.update') }}" method="POST" class="address__form--form">
                 @csrf

@@ -28,3 +28,13 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .admin__header--ttl {
+        font-size: 24px;
+    }
+
+    .admin__btn {
+        font-size: 20px;
+    }
+}

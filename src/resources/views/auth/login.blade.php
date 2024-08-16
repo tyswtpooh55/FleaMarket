@@ -14,9 +14,7 @@
 
 @section('content')
     <div class="auth__content">
-        <div class="auth__heading">
             <h2 class="heading__ttl">ログイン</h2>
-        </div>
         <div class="auth__form">
             <form action="/login" method="POST" class="auth__form-form">
                 @csrf

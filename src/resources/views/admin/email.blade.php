@@ -34,17 +34,15 @@
 
 @section('content')
 <div class="admin-email__content">
-    <div class="admin-email__header">
-        <h3 class="admin-email__header--ttl">メール送信</h3>
-    </div>
+    <h3 class="admin-email__header--ttl">メール送信</h3>
     <div class="alert">
         @if (session('success'))
-        <p class="alert-success">{{ session('success') }}</p>
+        <p class="success">{{ session('success') }}</p>
         @endif
         @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $error)
-            <li class="alert-error">{{ $error }}</li>
+            <li class="error">{{ $error }}</li>
             @endforeach
         </ul>
         @endif

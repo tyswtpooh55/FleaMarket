@@ -3,13 +3,10 @@
     margin: 100px auto;
 }
 
-.user-manage__header {
-    text-align: center;
-}
-
 .user-manage__header--ttl {
     font-size: 30px;
     font-weight: 700;
+    text-align: center;
 }
 
 .users__table {
@@ -19,7 +16,7 @@
 
 .users__table--table {
     width: 100%;
-    max-width: 1230px;
+    max-width: 960px;
     margin: auto;
     border-collapse: collapse;
 }
@@ -37,11 +34,13 @@
     padding: 15px;
     font-weight: 700;
     text-align: center;
+    white-space: nowrap;
 }
 
 .user__data {
     font-size: 16px;
     padding: 15px 20px;
+    white-space: nowrap;
 }
 
 .user__delete--btn {
@@ -51,4 +50,25 @@
     color: #fff;
     font-weight: 700;
     padding: 5px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .user-manage__content {
+        width: 95%;
+    }
+
+    .user-manage__header--ttl {
+        font-size: 24px;
+    }
+
+    .user__label,
+    .user__data {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .user__delete--btn {
+        font-weight: 400;
+        padding: 3px 5px;
+    }
 }
