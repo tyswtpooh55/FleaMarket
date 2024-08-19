@@ -127,6 +127,9 @@
                             </div>
                             <div class="comment__comment">
                                 <p class="comment__written">{{ $comment->comment }}</p>
+                                @error('comment')
+                                <p class="error">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         @endif

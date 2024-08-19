@@ -61,7 +61,7 @@
                 @if (!empty($item->transaction))
                 <button disabled="disabled" class="data__purchase-btn--btn data__purchase--btn--sold-out">Sold Out</button>
                 @else
-                <form action="{{ route('purchase', $item->id) }}" method="GET">
+                <form action="{{ route('purchase.index', $item->id) }}" method="GET">
                     @csrf
                     <button type="submit" class="data__purchase-btn--btn">購入する</button>
                 </form>

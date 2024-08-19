@@ -24,9 +24,9 @@ class EmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'recipients' => ['required'],
-            'subject' => ['required'],
-            'message' => ['required'],
+            'recipients' => ['required', 'string', 'regex:/^(\d+,)*\d+$/'],
+            'subject' => ['required', 'string'],
+            'message' => ['required','string'],
         ];
     }
 
