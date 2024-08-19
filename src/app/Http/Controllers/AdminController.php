@@ -39,7 +39,6 @@ class AdminController extends Controller
     public function sendEmail(EmailRequest $request)
     {
         $recipients = explode(',', $request->input('recipients', ''));
-        dd($recipients);
         $subject = $request->input('subject');
         $message = $request->input('message');
 
