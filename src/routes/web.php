@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Livewire\ItemImg;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
-Route::get('/item/{item_id}', [ItemController::class, 'detail'])->name('item');
+Route::get('/item/detail/{item_id}', [ItemController::class, 'detail'])->name('item');
 Route::get('/item/search', [ItemController::class, 'search'])->name('search');
-Route::get('/item/{item_id}/comment', [ItemController::class, 'comment'])->name('comment');
+Route::get('/item/comment/{item_id}', [ItemController::class, 'comment'])->name('comment');
 
 //ログイン認証
 Route::middleware('auth')->group(function () {
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
         Route::post('/sell', [ItemController::class, 'sale'])->name('sale');
         Route::post('/comment/{item_id}', [ItemController::class, 'createComment'])->name('comment.create');
-        Route::delete('/comment/{item_id}', [ItemController::class, 'deleteComment'])->name('comment.delete');
+        Route::post('/delete/comment/{item_id}', [ItemController::class, 'deleteComment'])->name('comment.delete');
     });
     // 購入
     Route::prefix('purchase')->name('purchase.')->group(function () {
@@ -51,12 +52,14 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+
+
 //管理者用ルート
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/manage/user', [AdminController::class, 'getUsers'])->name('users');
-    Route::delete('/delete/user/{user_id}', [AdminController::class, 'deleteUser'])->name('delete.user');
+    Route::post('/delete/user/{user_id}', [AdminController::class, 'deleteUser'])->name('delete.user');
     Route::get('/email', [AdminController::class, 'writeEmail'])->name('write.email');
-    Route::post('/email', [AdminController::class, 'sendEmail'])->name('admin.send.email');
+    Route::post('/email', [AdminController::class, 'sendEmail'])->name('send.email');
 });
 
