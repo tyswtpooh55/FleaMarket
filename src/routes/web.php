@@ -4,7 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Livewire\ItemImg;
+use App\Http\Controllers\S3Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,21 +18,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+if (app()->environment(['local'])) {
+    $itemController = ItemController::class;
+    $accountController = AccountController::class;
+} else {
+    $itemController = S3Controller::class;
+    $accountController = S3Controller::class;
+}
+
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/item/detail/{item_id}', [ItemController::class, 'detail'])->name('item');
 Route::get('/item/search', [ItemController::class, 'search'])->name('search');
 Route::get('/item/comment/{item_id}', [ItemController::class, 'comment'])->name('comment');
 
 //ログイン認証
-Route::middleware('auth')->group(function () {
-    Route::prefix('mypage')->name('mypage.')->group(function () {
+Route::middleware('auth')->group(function () use($accountController, $itemController) {
+    Route::prefix('mypage')->name('mypage.')->group(function () use($accountController) {
         Route::get('/', [AccountController::class, 'index'])->name('index');
         Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
-        Route::post('/profile', [AccountController::class,'updateProfile'])->name('profile.update');
+        Route::post('/profile', [$accountController,'updateProfile'])->name('profile.update');
     });
-    Route::prefix('item')->group(function () {
+    Route::prefix('item')->group(function () use($itemController) {
         Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
-        Route::post('/sell', [ItemController::class, 'sale'])->name('sale');
+        Route::post('/sell', [$itemController, 'sale'])->name('sale');
         Route::post('/comment/{item_id}', [ItemController::class, 'createComment'])->name('comment.create');
         Route::post('/delete/comment/{item_id}', [ItemController::class, 'deleteComment'])->name('comment.delete');
     });
