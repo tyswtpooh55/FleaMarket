@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\ItemImg;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Item;
+use App\Models\ItemImage;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +72,7 @@ class S3Controller extends Controller
         if ($request->hasFile('img_url')) {
             foreach ($request->file('img_url') as $img) {
                 $path = $img->store('images/items');
-                ItemImg::create([
+                ItemImage::create([
                     'item_id' => $item->id,
                     'img_url' => $path,
                 ]);

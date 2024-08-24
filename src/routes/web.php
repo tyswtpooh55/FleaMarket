@@ -61,7 +61,6 @@ Route::middleware('auth')->group(function () use($accountController, $itemContro
 });
 
 
-
 //管理者用ルート
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
