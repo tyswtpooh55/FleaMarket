@@ -11,13 +11,13 @@ class ItemImg extends Component
 
     public $imgs = [];
 
-    public function updatedImg()
+    public function updatedImgs()
     {
         $this->validate([
             'imgs.*' => 'image|max:1024',
         ]);
 
-        foreach ($$this->imgs as $img) {
+        foreach ($this->imgs as $img) {
             $img->store('imgs');
         }
     }

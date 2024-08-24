@@ -69,6 +69,7 @@ class ItemController extends Controller
             'condition_id' => $request->input('condition_id')
         ]);
 
+        // 画像イメージがあればitem_imagesテーブルにデータ挿入
         if ($request->hasFile('img_url')) {
             foreach ($request->file('img_url') as $img) {
                 $path = $img->store('public/images/items');

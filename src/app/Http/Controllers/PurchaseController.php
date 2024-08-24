@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
 use App\Models\Item;
 use App\Models\PaymentMethod;
 use App\Models\Profile;
@@ -68,7 +67,7 @@ class PurchaseController extends Controller
         ));
     }
 
-    public function updateAddress(ProfileRequest $request)
+    public function updateAddress(Request $request)
     {
         $user= Auth::user();
 
@@ -95,7 +94,7 @@ class PurchaseController extends Controller
         }
 
         $itemId = session('item_id');
-        return redirect()->route('purchase', ['item_id' => $itemId]);
+        return redirect()->route('purchase.index', ['item_id' => $itemId]);
     }
 
     public function paymentMethod()
@@ -113,7 +112,7 @@ class PurchaseController extends Controller
         session(['method_id' => $request->input('method_id')]);
 
         $itemId = session('item_id');
-        return redirect()->route('purchase', ['item_id' => $itemId]);
+        return redirect()->route('purchase.index', ['item_id' => $itemId]);
     }
 
     public function stripe()
@@ -213,16 +212,4 @@ class PurchaseController extends Controller
 
         return view('payments/credit_failed');
     }
-
-    /*
-    Webhookでコンビニ払い、銀行振込が実行されると、
-    paymentSuccessの動向、
-    期限内に支払われなかった場合、paymentFailedの動向が必要
-
-    Local環境下ではWebhookの動作確認ができない…
-    Ngrokを導入するとできるようにはなるけど、URLが再起動すると変更される
-    ↓
-    AWSでの実装は可能
-    */
-
 }
