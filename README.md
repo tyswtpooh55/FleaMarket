@@ -9,7 +9,7 @@ coachtechブランドのアイテムの出品
 - 開発環境: 'http://localhost/'
 - phpMyAdmin: 'http://localhost:8080/'
 - mailhog: 'http://localhost:8025/'
-- 本番環境: 'http://'
+- 本番環境: 'http://54.150.197.191'
 
 ## 機能一覧
 - 会員登録
@@ -64,7 +64,8 @@ coachtechブランドのアイテムの出品
 1. PHPコンテナにログイン 
    `docker-compose exec php bash`
 2. `composer install`
-3. [.env.example]ファイルを[.env]ファイルに命名変更
+3. [.env.example]ファイルを[.env]ファイルにコピー
+   `cp .env.example .env`
 4. [.env]ファイルに以下の環境変数を追加
    ```
    APP_NAME="COACHTECH Flea Market"
