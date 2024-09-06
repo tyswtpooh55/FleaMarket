@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () use($accountController, $itemContro
         Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
         Route::post('/sell', [$itemController, 'sale'])->name('sale');
         Route::post('/comment/{item_id}', [ItemController::class, 'createComment'])->name('comment.create');
-        Route::post('/delete/comment/{item_id}', [ItemController::class, 'deleteComment'])->name('comment.delete');
+        Route::post('/delete/comment/{comment_id}', [ItemController::class, 'deleteComment'])->name('comment.delete');
     });
     // 購入
     Route::prefix('purchase')->name('purchase.')->group(function () {
@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () use($accountController, $itemContro
     // 支払い方法
     Route::prefix('payment')->name('payment.')->group(function () {
         Route::get('/method', [PurchaseController::class, 'paymentMethod'])->name('method');
-        Route::get('/method/select', [PurchaseController::class, 'paymentMethodSelection'])->name('method.select');
+        Route::post('/method', [PurchaseController::class, 'paymentMethodSelection'])->name('method.select');
         Route::post('/stripe', [PurchaseController::class, 'stripe'])->name('stripe');
         Route::get('/success', [PurchaseController::class, 'paymentSuccess'])->name('success');
         Route::get('/failed', [PurchaseController::class, 'paymentFailed'])->name('failed');

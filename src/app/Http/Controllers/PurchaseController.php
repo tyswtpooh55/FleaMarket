@@ -24,7 +24,6 @@ class PurchaseController extends Controller
         $method_id = 1;  //初期値:クレジット払い
         if (session('method_id')) {
             $method_id = session('method_id');
-            session()->forget('method_id');
         }
         $method = PaymentMethod::findOrFail($method_id);
 
@@ -118,6 +117,7 @@ class PurchaseController extends Controller
     public function stripe()
     {
         $user = Auth::user();
+        session()->forget('method_id');
 
         //住所未登録の場合、住所変更ページへリダイレクト
         if (empty($user->profile)) {
