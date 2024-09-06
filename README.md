@@ -95,6 +95,34 @@ coachtechブランドのアイテムの出品
 8. ストレージリンクの作成
    `php artisan storage:link`
 
+## PHPUnitテスト
+1. MySQLコンテナに管理者権限でログイン
+   `exit` (PHPコンテナからログアウト)
+   ` docker exec -it 『MySQLコンテナID』 mysql -u root -p`
+   Enter password: `root`
+2. テスト用テータベースの作成
+   `CREATE DATABASE test;`
+3. MySQLコンテナからログアウトし、PHPコンテナにログイン
+   `exit`
+   `docker-compose exec php bash`
+4. [.env]ファイルを[.env.testing]ファイルにコピー
+   `cp .env .env.testing
+5. [.env.testing]ファイルに以下の変更
+   ```
+   APP_ENV=test
+   APP_KEY=
+
+   DB_DATABASE=test
+   DB_USERNAME=root
+   DB_PASSWORD=root
+   ```
+6. アプリケーションキーの作成
+   `php artisan key:generate --env=testing`
+7. テスト用テーブルの作成
+   `php artisan migrate`
+8. テストの実行
+   `php artisan test`
+
 ## 開発環境のダミーデータ
 - 管理者
   - User名: `Admin`
