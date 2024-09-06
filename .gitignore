@@ -17,3 +17,4 @@ er.drawio
 /docker/mysql/data
 /.ssh
 /src/.env.testing
+/src/.circleci
